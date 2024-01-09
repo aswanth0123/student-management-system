@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Filtering Example</title>
+</head>
+<body>
+
+<h1>Data Filtering Example</h1>
+
+<!-- Input box for filtering -->
+<input type="text" id="filterInput" placeholder="Enter filter term" oninput="filterData()">
+
+<!-- Display filtered data -->
+<table border="1">
+    <tr>
+        <td>name</td>
+        <td>email</td>
+    </tr>
+<tbody id="filteredDataList">
+    {% for item in student %}
+    <tr>
+        <td>{{ item.name }}</td><td>{{ item.email }}</td>
+    </tr>
+
+    {% endfor %}
+</tbody>
+</table>
+
+<script>
+    // JavaScript function to filter data based on user input
+    function filterData() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('filterInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById('filteredDataList');
+        li = ul.getElementsByTagName('td');
+
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = '';
+            } else {
+                li[i].style.display = 'none';
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
